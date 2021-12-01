@@ -15,6 +15,7 @@ namespace Day1
         }
 
         /*
+         https://github.com/dehaaneric/AoC
             |     Method |      Mean |    Error |    StdDev |   Gen 0 | Allocated |
             |----------- |----------:|---------:|----------:|--------:|----------:|
             |   Generics | 276.49 us | 5.498 us | 11.230 us | 63.4766 |    195 KB |

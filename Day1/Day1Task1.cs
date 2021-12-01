@@ -13,10 +13,11 @@ namespace Day1
             _measurements = input.Select(int.Parse).ToArray();
         }
         /*
-            |     Method |      Mean |     Error |    StdDev | Allocated |
-            |----------- |----------:|----------:|----------:|----------:|
-            |   Generics | 28.428 us | 0.5538 us | 1.0670 us |      48 B |
-            | NoGenerics |  4.745 us | 0.0947 us | 0.1013 us |         - |
+        https://github.com/dehaaneric/AoC
+        |     Method |      Mean |     Error |    StdDev | Allocated |
+        |----------- |----------:|----------:|----------:|----------:|
+        |   Generics | 25.062 us | 0.4474 us | 0.7097 us |      48 B |
+        | NoGenerics |  3.474 us | 0.0692 us | 0.1824 us |         - |
         */
 
         [Benchmark]
