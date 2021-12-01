@@ -1,4 +1,4 @@
-﻿##Task 1
+﻿## Task 1
 
 |     Method |      Mean |     Error |    StdDev | Allocated |
 |----------- |----------:|----------:|----------:|----------:|
@@ -6,7 +6,7 @@
 | NoGenerics |  4.745 us | 0.0947 us | 0.1013 us |         - |
 
 
-##Task 2
+## Task 2
 
 |     Method |      Mean |    Error |    StdDev |   Gen 0 | Allocated |
 |----------- |----------:|---------:|----------:|--------:|----------:|
