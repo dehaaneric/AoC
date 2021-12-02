@@ -16,3 +16,33 @@ Console.WriteLine(summery);
 //var total2Functional = day2task2.CalculateFunctional();
 
 //Console.WriteLine($"Final score: {total2}"); // 2039912
+
+
+/* MINIMAL APPROACH
+ var input = File.ReadAllLines(@"day2input.txt");
+
+Console.WriteLine($"Result: {CalculateFunctional()}");
+
+int CalculateFunctional()
+{
+    int aim = 0, position = 0, depth = 0;
+    foreach (var line in input)
+    {
+        var items = line.Split(' ');
+        var action = items[0];
+        var value = int.Parse(items[1]);
+
+        if (action == "forward")
+        {
+            position += value;
+            depth += value * aim;
+        }
+        else if (action == "up")
+            aim -= value;
+        else if (action == "down")
+            aim += value;
+    }
+
+    return depth * position;
+}
+ */
