@@ -6,3 +6,5 @@ These are my best (in reasonable time) efforts to join the Advent of Code challa
 > *Martin Fowler, 2008*
 
 > Performance is a feature
+
+Looking for feedback, tips and tricks that add value to my way of thinking and resolving the AoC puzzles 😀.
