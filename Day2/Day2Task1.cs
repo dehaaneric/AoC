@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BenchmarkDotNet.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Day2
 {
+    [MemoryDiagnoser]
     public class Day2Task1
     {
         string[] _input;
@@ -14,6 +16,7 @@ namespace Day2
             _input = System.IO.File.ReadAllLines(@"day2input.txt");
         }
 
+        [Benchmark]
         public int Calculate()
         {
             var linesCount = _input.Length;

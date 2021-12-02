@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BenchmarkDotNet.Attributes;
 
 namespace Day2
 {
+    [MemoryDiagnoser]
     public class Day2Task2
     {
         string[] _input;
@@ -14,7 +11,8 @@ namespace Day2
             _input = System.IO.File.ReadAllLines(@"day2input.txt");
         }
 
-        public int Calculate()
+        [Benchmark]
+        public int CalculateOO()
         {
             var linesCount = _input.Length;
 
@@ -36,6 +34,39 @@ namespace Day2
             int total = finalDepth * finalHorizontal;
 
             return total;
+        }
+
+        [Benchmark]
+        public int CalculateFunctional()
+        {
+            var lineCount = _input.Length;
+            var movements = new List<Tuple<string, int>>(lineCount);
+            foreach (var line in _input)
+            {
+                var parts = line.Split(' ');
+                movements.Add(new Tuple<string, int>(parts[0], int.Parse(parts[1])));
+            }
+
+            int aim = 0, position = 0, depth = 0;
+
+            foreach (var movement in movements)
+            {
+                if (movement.Item1 == "forward")
+                {
+                    position += movement.Item2;
+                    depth += movement.Item2 * aim;
+                }
+                else if(movement.Item1 == "up")
+                {
+                    aim -= movement.Item2;
+                }
+                else if (movement.Item1 == "down")
+                {
+                    aim += movement.Item2;
+                }
+            }
+
+            return depth * position;
         }
 
         class Location
