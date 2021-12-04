@@ -32,8 +32,7 @@ namespace Day3Tests
         [Fact]
         public void Calculate_Task1_HasExpectedOutput()
         {
-            var s = new Submarine();
-            int outcome = s.Calculate_Task1(inputs.ToArray());
+            int outcome = Submarine.Calculate_Task1(inputs.ToArray());
 
             Assert.Equal(198, outcome);
         }
@@ -41,8 +40,7 @@ namespace Day3Tests
         [Fact]
         public void Calculate_Task2_HasExpectedOutput()
         {
-            var s = new Submarine();
-            int outcome = s.Calculate_Task2(inputs.ToArray());
+            int outcome = Submarine.Calculate_Task2(inputs.ToArray());
 
             Assert.Equal(230, outcome);
         }

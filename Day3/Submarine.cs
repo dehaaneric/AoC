@@ -7,7 +7,7 @@ namespace Day3
 {
     public class Submarine
     {
-        public int Calculate_Task1(string[] inputs)
+        public static int Calculate_Task1(string[] inputs)
         {
             List<BinaryNumber> binaryInputs = inputs.Select(x => new BinaryNumber(x)).ToList();
             int maxLength = binaryInputs.First().Length;
@@ -22,7 +22,7 @@ namespace Day3
             return gamma * epsilon;
         }
 
-        public int Calculate_Task2(string[] inputs)
+        public static int Calculate_Task2(string[] inputs)
         {
             List<BinaryNumber> binaryInputs = inputs.Select(x => new BinaryNumber(x)).ToList();
             int maxLength = binaryInputs.First().Length;
@@ -41,7 +41,7 @@ namespace Day3
             return oxygenGeneratorRating * co2ScubberRating;
         }
 
-        private Dictionary<int, bool> GetMostCommonValueAtIndexes(int maxLength, List<BinaryNumber> binaryInputs)
+        private static Dictionary<int, bool> GetMostCommonValueAtIndexes(int maxLength, List<BinaryNumber> binaryInputs)
         {
             var returnCollection = new Dictionary<int, bool>(binaryInputs.Count);
 
@@ -55,7 +55,7 @@ namespace Day3
             return returnCollection;
         }
 
-        private List<BinaryNumber> GetResultByBitCriteria(List<BinaryNumber> list, int currentIndex, int maxIndex, bool invertMostCommon)
+        private static List<BinaryNumber> GetResultByBitCriteria(List<BinaryNumber> list, int currentIndex, int maxIndex, bool invertMostCommon)
         {
             if (currentIndex >= maxIndex || list.Count == 1) return list;
 
@@ -70,7 +70,7 @@ namespace Day3
             return GetResultByBitCriteria(list, currentIndex += 1, maxIndex, invertMostCommon);
         }
 
-        private void RemoveValuesNotInList(List<BinaryNumber> sourceList, List<string> valuesToKeep)
+        private static void RemoveValuesNotInList(List<BinaryNumber> sourceList, List<string> valuesToKeep)
         {
             for (int i = sourceList.Count; i-- > 0;)
             {
@@ -79,7 +79,7 @@ namespace Day3
             }
         }
 
-        public string GetByteRepresentation(bool invert, Dictionary<int, bool> mostCommonAtIndex)
+        public static string GetByteRepresentation(bool invert, Dictionary<int, bool> mostCommonAtIndex)
         {
             var sb = new StringBuilder();
             foreach (var mostCommon in mostCommonAtIndex)
@@ -91,53 +91,6 @@ namespace Day3
             }
 
             return sb.ToString();
-        }
-    }
-
-    public static class Extensions
-    {
-        public static int ToBit(this bool value)
-        {
-            return value ? 1 : 0;
-        }
-        public static T MostCommon<T>(this IEnumerable<T> list)
-        {
-            var most = list
-                    .GroupBy(i => i)
-                    .OrderByDescending(grp => grp.Count())
-                    .ThenByDescending(x => x.Key)
-                    .Select(grp => grp.Key)
-                    .First();
-
-            return most;
-        }
-
-        public static List<string> GetBinaryValuesWithMostCommonAtPosition(this List<BinaryNumber> binaryInputs, int index, bool bitValue)
-        {
-            var returnList = new List<string>(binaryInputs.Count);
-            foreach (var input in binaryInputs)
-            {
-                if (input.GetAtIndex(index) == bitValue)
-                    returnList.Add(input.Value);
-            }
-
-            return returnList;
-        }
-    }
-
-    public class BinaryNumber
-    {
-        public BinaryNumber(string value)
-        {
-            Value = value;
-        }
-
-        public string Value { get; }
-        public int Length => Value.Length;
-        public bool GetAtIndex(int index)
-        {
-            string stringAtIndex = Value.Substring(index, 1);
-            return stringAtIndex == "1";
         }
     }
 }
