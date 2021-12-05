@@ -8,7 +8,20 @@ namespace Day4.Models
 {
     public class BingoCard
     {
-        Dictionary<int, List<BingoNumber>> _rows = new Dictionary<int, List<BingoNumber>>(5);
+        private Dictionary<int, List<BingoNumber>> _rows;
+        public Guid Id { get; }
+        public BingoCard()
+        {
+            Id = new Guid();
+            _rows = new Dictionary<int, List<BingoNumber>>(5);
+        }
+
+        public bool HasWon { get; private set; }
+        public void MarkAsWon()
+        {
+            HasWon = true;
+        }
+
         public void AddNumbersToRow(int rowIndex, params int[] numbers)
         {
             _rows.Add(rowIndex, numbers.Select(x => new BingoNumber(x, false)).ToList());
@@ -66,11 +79,11 @@ namespace Day4.Models
         public int GetTotalNumberScore(bool expectedDrawnValue)
         {
             int sumScore = 0;
-            foreach(var row in _rows)
+            foreach (var row in _rows)
             {
-                foreach(var bingoNumber in row.Value)
+                foreach (var bingoNumber in row.Value)
                 {
-                    if(bingoNumber.IsDrawn == expectedDrawnValue)
+                    if (bingoNumber.IsDrawn == expectedDrawnValue)
                     {
                         sumScore += bingoNumber.Number;
                     }
@@ -83,23 +96,6 @@ namespace Day4.Models
         public int GetRowCount()
         {
             return _rows.Count;
-        }
-    }
-
-    public class BingoNumber
-    {
-        public BingoNumber(int number, bool drawn)
-        {
-            Number = number;
-            IsDrawn = drawn;
-        }
-
-        public int Number { get; }
-        public bool IsDrawn { get; private set; }
-
-        internal void SetDrawn()
-        {
-            this.IsDrawn = true;
         }
     }
 }

@@ -4,9 +4,9 @@
     {
         public int StartFirstToWin(List<int> drawnNumbers, List<BingoCard> bingoCards)
         {
-            foreach (var number in drawnNumbers)
+            foreach (int number in drawnNumbers)
             {
-                foreach (var card in bingoCards)
+                foreach (BingoCard card in bingoCards)
                 {
                     bool hasHit = card.MarkDrawnNumber(number);
 
@@ -28,26 +28,23 @@
 
         public int StartLastToWin(List<int> drawnNumbers, List<BingoCard> bingoCards)
         {
-            int totalBingoCards = bingoCards.Count;
-            List<int> bingoCardIndexesWon = new List<int>();
+            var totalBingoCards = bingoCards.Count;
+            
             foreach (var number in drawnNumbers)
             {
-                for (int cardIndex = 0; cardIndex < totalBingoCards; cardIndex++)
+                foreach(var card in bingoCards)
                 {
-                    var card = bingoCards[cardIndex];
                     bool hasHit = card.MarkDrawnNumber(number);
 
                     if (hasHit)
                     {
                         var hasRowOrColumn = card.GetHasFullRowOrColumn();
-                        if (hasRowOrColumn && !bingoCardIndexesWon.Contains(cardIndex))
-                        {
-                            bingoCardIndexesWon.Add(cardIndex);
-                        }
+                        if (hasRowOrColumn)
+                            card.MarkAsWon();
 
-                        if (totalBingoCards == bingoCardIndexesWon.Count)
+                        bool isTheLastToWin = totalBingoCards == bingoCards.Where(x => x.HasWon).Count();
+                        if (isTheLastToWin)
                         {
-                            // the last
                             var totalUnmarkedNumbers = card.GetTotalNumberScore(false);
                             var result = number * totalUnmarkedNumbers;
                             return result;
@@ -56,7 +53,7 @@
                 }
             }
 
-            return -1;
+            throw new ApplicationException("Unexpected end of events");
         }
     }
 }
